@@ -2,29 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 210 100% 100%;
+    --foreground: 210 5% 10%;
+    --card: 210 50% 100%;
+    --card-foreground: 210 5% 15%;
+    --popover: 210 100% 100%;
+    --popover-foreground: 210 100% 10%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 30% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 172 30% 95%;
+    --muted-foreground: 210 5% 40%;
+    --accent: 172 30% 90%;
+    --accent-foreground: 210 5% 15%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 5% 100%;
+    --border: 210 30% 82%;
+    --input: 210 30% 50%;
+    --ring: 210 100% 50%;
+    --radius: 0.3rem;
+  }
+
+  .dark {
+    --background: 210 50% 10%;
+    --foreground: 210 5% 90%;
+    --card: 210 50% 10%;
+    --card-foreground: 210 5% 90%;
+    --popover: 210 50% 5%;
+    --popover-foreground: 210 5% 90%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 30% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 172 30% 25%;
+    --muted-foreground: 210 5% 60%;
+    --accent: 172 30% 25%;
+    --accent-foreground: 210 5% 90%;
+    --destructive: 0 100% 49%;
+    --destructive-foreground: 210 5% 90%;
+    --border: 210 30% 49%;
+    --input: 210 30% 49%;
+    --ring: 210 100% 50%;
+    --radius: 0.3rem;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  body {
+    @apply bg-background text-foreground;
   }
 }
