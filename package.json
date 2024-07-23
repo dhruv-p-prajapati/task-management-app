@@ -16,6 +16,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.414.0",
+    "mongoose": "^8.5.1",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
@@ -40,9 +41,8 @@
   },
   "lint-staged": {
     "*/**/*.{js,jsx,ts,tsx}": [
-      "prettier --write",
       "eslint --fix",
-      "eslint"
+      "prettier --write"
     ],
     "*/**/*.{json,css,md}": [
       "prettier --write"
