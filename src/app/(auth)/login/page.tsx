@@ -67,29 +67,31 @@ const LoginPage = () => {
           </div>
         </div>
 
-        <CustomForm<z.infer<typeof loginFormSchema>>
-          initialValues={initialValues}
-          formSchema={loginFormSchema}
-          onSubmit={onSubmit}
-          elements={[
-            {
-              element: 'email',
-              label: 'Email',
-              placeholder: 'dhruv@example.com',
-              key: 'email',
-            },
-            {
-              element: 'password',
-              label: 'Password',
-              placeholder: 'password123@',
-              key: 'password',
-            },
-          ]}
-        >
-          <Button type="submit" className="w-full">
-            Login to TaskMaster
-          </Button>
-        </CustomForm>
+        <div className="w-96">
+          <CustomForm<z.infer<typeof loginFormSchema>>
+            initialValues={initialValues}
+            formSchema={loginFormSchema}
+            onSubmit={onSubmit}
+            elements={[
+              {
+                element: 'email',
+                label: 'Email',
+                placeholder: 'dhruv@example.com',
+                key: 'email',
+              },
+              {
+                element: 'password',
+                label: 'Password',
+                placeholder: 'password123@',
+                key: 'password',
+              },
+            ]}
+          >
+            <Button type="submit" className="w-full">
+              Login to TaskMaster
+            </Button>
+          </CustomForm>
+        </div>
 
         <div className="w-full">
           <div className="my-4 flex items-center">
