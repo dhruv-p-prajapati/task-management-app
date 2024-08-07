@@ -88,41 +88,43 @@ const RegisterPage = () => {
           </div>
         </div>
 
-        <CustomForm<z.infer<typeof signUpFormSchema>>
-          initialValues={initialValues}
-          formSchema={signUpFormSchema}
-          onSubmit={onSubmit}
-          elements={[
-            {
-              element: 'input',
-              label: 'Username',
-              placeholder: 'Dhruv224',
-              key: 'name',
-            },
-            {
-              element: 'email',
-              label: 'Email',
-              placeholder: 'dhruv@example.com',
-              key: 'email',
-            },
-            {
-              element: 'password',
-              label: 'Password',
-              placeholder: 'password123@',
-              key: 'password',
-            },
-            {
-              element: 'password',
-              label: 'Confirm Password',
-              placeholder: 'password123@',
-              key: 'confirmPassword',
-            },
-          ]}
-        >
-          <Button type="submit" className="w-full">
-            Register to TaskMaster
-          </Button>
-        </CustomForm>
+        <div className="w-96">
+          <CustomForm<z.infer<typeof signUpFormSchema>>
+            initialValues={initialValues}
+            formSchema={signUpFormSchema}
+            onSubmit={onSubmit}
+            elements={[
+              {
+                element: 'input',
+                label: 'Username',
+                placeholder: 'Dhruv224',
+                key: 'name',
+              },
+              {
+                element: 'email',
+                label: 'Email',
+                placeholder: 'dhruv@example.com',
+                key: 'email',
+              },
+              {
+                element: 'password',
+                label: 'Password',
+                placeholder: 'password123@',
+                key: 'password',
+              },
+              {
+                element: 'password',
+                label: 'Confirm Password',
+                placeholder: 'password123@',
+                key: 'confirmPassword',
+              },
+            ]}
+          >
+            <Button type="submit" className="w-full">
+              Register to TaskMaster
+            </Button>
+          </CustomForm>
+        </div>
 
         <div className="w-full">
           <div className="my-4 flex items-center">
