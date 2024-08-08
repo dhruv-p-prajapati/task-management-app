@@ -93,6 +93,7 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account }: { user: any; account: any }) {
       if (account.provider == 'google') {
@@ -119,5 +120,10 @@ export const authOptions: AuthOptions = {
       session.user.role = token.role;
       return session;
     },
+  },
+  pages: {
+    signIn: '/login',
+    signOut: '/login',
+    error: '/404',
   },
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import ThemeSwitch from '@/components/common/ThemeSwitch';
+import ThemeSwitch from '@/components/common/ThemeSwitch/ThemeSwitch';
 import { useToast } from '@/components/ui/use-toast';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';

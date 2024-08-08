@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/navigation';
-import CustomForm from '@/components/common/CustomForm';
+import CustomForm from '@/components/common/CustomForm/CustomForm';
 import { useToast } from '@/components/ui/use-toast';
 import { EndPoints } from '@/types/endpoints.types';
 

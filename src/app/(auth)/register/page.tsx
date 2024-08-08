@@ -6,7 +6,7 @@ import React from 'react';
 import { z } from 'zod';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/navigation';
-import CustomForm from '@/components/common/CustomForm';
+import CustomForm from '@/components/common/CustomForm/CustomForm';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/components/ui/use-toast';
 import { EndPoints } from '@/types/endpoints.types';
