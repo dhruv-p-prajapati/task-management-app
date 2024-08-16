@@ -21,6 +21,9 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema({
     required: true,
     default: UserRole.USER,
   },
+  bio: {
+    type: String,
+  },
 });
 
 const User =

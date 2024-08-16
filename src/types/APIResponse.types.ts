@@ -1,6 +1,6 @@
-export interface IAPIResponse {
+export interface IAPIResponse<T> {
   success: boolean;
-  data: any;
+  data: T;
   message: string;
   status: number;
 }

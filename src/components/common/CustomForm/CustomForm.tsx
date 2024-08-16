@@ -11,18 +11,20 @@ import { z } from 'zod';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 interface IFormElement<T> {
   label: string;
   placeholder?: string;
-  element: 'input' | 'email' | 'password';
+  element: 'input' | 'email' | 'password' | 'textarea';
   key: keyof T;
+  disabled?: boolean;
 }
 
 interface ICustomFormProp<T extends FieldValues> {
   formSchema: z.ZodSchema<T>;
   onSubmit: SubmitHandler<T>;
-  initialValues: any;
+  initialValues?: T;
   elements: IFormElement<T>[];
   children: React.ReactNode;
 }
@@ -36,7 +38,7 @@ const CustomForm = <T extends FieldValues>({
 }: ICustomFormProp<T>) => {
   const form = useForm<any>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialValues,
+    defaultValues: initialValues ?? {},
   });
 
   return (
@@ -60,6 +62,7 @@ const CustomForm = <T extends FieldValues>({
                       <Input
                         type="email"
                         placeholder={element?.placeholder}
+                        disabled={element.disabled}
                         {...field}
                       />
                     </FormControl>
@@ -78,15 +81,40 @@ const CustomForm = <T extends FieldValues>({
                 name={element.key as string}
                 render={({ field }) => (
                   <FormItem className="space-y-1">
-                    <FormLabel className="">{element.label}</FormLabel>
+                    <FormLabel>{element.label}</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
                         placeholder={element?.placeholder}
+                        disabled={element.disabled}
                         {...field}
                       />
                     </FormControl>
                     <FormMessage className="font-semibold" />
+                  </FormItem>
+                )}
+              />
+            );
+          }
+
+          if (element.element === 'textarea') {
+            return (
+              <FormField
+                key={index}
+                control={form.control}
+                name={element.key as string}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{element.label}</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Tell us a little bit about yourself"
+                        className="resize-none"
+                        disabled={element.disabled}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -102,7 +130,11 @@ const CustomForm = <T extends FieldValues>({
                 <FormItem className="space-y-1">
                   <FormLabel className="">{element.label}</FormLabel>
                   <FormControl>
-                    <Input placeholder={element?.placeholder} {...field} />
+                    <Input
+                      placeholder={element?.placeholder}
+                      disabled={element.disabled}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage className="font-semibold" />
                 </FormItem>

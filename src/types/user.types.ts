@@ -1,9 +1,7 @@
 import { DefaultSession } from 'next-auth';
 
 export enum UserRole {
-  // eslint-disable-next-line no-unused-vars
   USER = 'user',
-  // eslint-disable-next-line no-unused-vars
   ADMIN = 'admin',
 }
 
@@ -13,13 +11,14 @@ export interface IUser {
   password?: string;
   imgUrl?: string;
   role: UserRole;
+  bio: string;
 }
 
 declare module 'next-auth' {
-  // eslint-disable-next-line no-unused-vars
   interface Session {
     user: {
       role: UserRole;
+      id: string;
     } & DefaultSession['user'];
   }
 }

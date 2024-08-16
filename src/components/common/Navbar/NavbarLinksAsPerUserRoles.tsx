@@ -1,8 +1,13 @@
 import { ILinkItem } from '@/types/link.types';
-import { GrProjects, GrTasks } from 'react-icons/gr';
+import { GrHome, GrProjects, GrTasks } from 'react-icons/gr';
 import { FiUsers } from 'react-icons/fi';
 
 export const NavbarLinksUser: ILinkItem[] = [
+  {
+    label: 'Home',
+    slug: '/',
+    icon: <GrHome />,
+  },
   {
     label: 'My Tasks',
     slug: '/my-tasks',
@@ -16,6 +21,11 @@ export const NavbarLinksUser: ILinkItem[] = [
 ];
 
 export const NavbarLinsAdmin: ILinkItem[] = [
+  {
+    label: 'Home',
+    slug: '/',
+    icon: <GrHome />,
+  },
   {
     label: 'Projects',
     slug: '/projects',
