@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { getToken, JWT } from 'next-auth/jwt';
 import { doesRoleHaveAccessToURL } from '@/lib/utils';
 import { UserRole } from '@/types/user.types';
-import { EndPoints } from './types/endpoints.types';
+import { RouteConstants } from './constants/routes.constants';
 
 export async function middleware(request: NextRequest) {
   const token = (await getToken({
@@ -14,20 +14,22 @@ export async function middleware(request: NextRequest) {
 
   if (!token) {
     if (
-      pathname === '/' + EndPoints.LOGIN ||
-      pathname === '/' + EndPoints.REGISTER
+      pathname === RouteConstants.LOGIN ||
+      pathname === RouteConstants.REGISTER
     ) {
       return NextResponse.next();
     } else {
-      return NextResponse.redirect(new URL('/login', request.nextUrl));
+      return NextResponse.redirect(
+        new URL(RouteConstants.LOGIN, request.nextUrl),
+      );
     }
   }
 
   if (
-    pathname === '/' + EndPoints.LOGIN ||
-    pathname === '/' + EndPoints.REGISTER
+    pathname === RouteConstants.LOGIN ||
+    pathname === RouteConstants.REGISTER
   ) {
-    return NextResponse.redirect(new URL('/', request.nextUrl));
+    return NextResponse.redirect(new URL(RouteConstants.HOME, request.nextUrl));
   }
 
   const roleHasAccessToUrl = doesRoleHaveAccessToURL(
@@ -36,11 +38,15 @@ export async function middleware(request: NextRequest) {
   );
 
   // Redirect user to 404 or access-denied page
-  if (!roleHasAccessToUrl && pathname !== '/404') {
-    return NextResponse.redirect(new URL('/404', request.nextUrl));
+  if (!roleHasAccessToUrl && pathname !== RouteConstants.NOT_FOUND) {
+    return NextResponse.redirect(
+      new URL(RouteConstants.NOT_FOUND, request.nextUrl),
+    );
   }
-  // if (!roleHasAccessToUrl && pathname !== '/access-denied') {
-  //   return NextResponse.redirect(new URL('/access-denied', request.nextUrl));
+  // if (!roleHasAccessToUrl && pathname !== RouteConstants.ACCESS_DENIED) {
+  //   return NextResponse.redirect(
+  //     new URL(RouteConstants.ACCESS_DENIED, request.nextUrl),
+  //   );
   // }
 
   return NextResponse.next();

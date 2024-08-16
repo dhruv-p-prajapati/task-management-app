@@ -8,16 +8,11 @@ import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/navigation';
 import CustomForm from '@/components/common/CustomForm/CustomForm';
 import { useToast } from '@/components/ui/use-toast';
-import { EndPoints } from '@/types/endpoints.types';
+import { RouteConstants } from '@/constants/routes.constants';
 
 const LoginPage = () => {
   const router = useRouter();
   const { toast } = useToast();
-
-  const initialValues = {
-    email: '',
-    password: '',
-  };
 
   const loginFormSchema = z.object({
     email: z.string().min(1, { message: 'Email is required' }),
@@ -29,7 +24,7 @@ const LoginPage = () => {
       email: data?.email,
       password: data?.password,
       redirect: false,
-      endPoint: EndPoints.LOGIN,
+      endPoint: RouteConstants.LOGIN,
     });
 
     if (res?.error) {
@@ -69,7 +64,6 @@ const LoginPage = () => {
 
         <div className="w-96">
           <CustomForm<z.infer<typeof loginFormSchema>>
-            initialValues={initialValues}
             formSchema={loginFormSchema}
             onSubmit={onSubmit}
             elements={[

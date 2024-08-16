@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { mongoInit } from '../db/dbConfig';
 import User from '@/models/user.model';
 import { IAPIResponse } from '@/types/APIResponse.types';
-import { EndPoints } from '@/types/endpoints.types';
+import { RouteConstants } from '@/constants/routes.constants';
 
 export const authOptions: AuthOptions = {
   session: {
@@ -42,9 +42,9 @@ export const authOptions: AuthOptions = {
       async authorize(credentials): Promise<any> {
         await mongoInit();
 
-        if (credentials?.endPoint === EndPoints.REGISTER) {
+        if (credentials?.endPoint === RouteConstants.REGISTER) {
           const res = await fetch(
-            `${process.env.NEXT_BASE_URL}/api/${EndPoints.REGISTER}`,
+            `${process.env.NEXT_BASE_URL}/api${RouteConstants.REGISTER}`,
             {
               method: 'POST',
               body: JSON.stringify({
@@ -56,7 +56,7 @@ export const authOptions: AuthOptions = {
             },
           );
 
-          const apiResponse: IAPIResponse = await res.json();
+          const apiResponse: IAPIResponse<any> = await res.json();
 
           if (!apiResponse.success) {
             throw new Error(apiResponse.message);
@@ -65,9 +65,9 @@ export const authOptions: AuthOptions = {
           return apiResponse.data;
         }
 
-        if (credentials?.endPoint === EndPoints.LOGIN) {
+        if (credentials?.endPoint === RouteConstants.LOGIN) {
           const res = await fetch(
-            `${process.env.NEXT_BASE_URL}/api/${EndPoints.LOGIN}`,
+            `${process.env.NEXT_BASE_URL}/api${RouteConstants.LOGIN}`,
             {
               method: 'POST',
               body: JSON.stringify({
@@ -78,7 +78,7 @@ export const authOptions: AuthOptions = {
             },
           );
 
-          const apiResponse: IAPIResponse = await res.json();
+          const apiResponse: IAPIResponse<any> = await res.json();
 
           if (!apiResponse.success) {
             throw new Error(apiResponse.message);
@@ -113,11 +113,13 @@ export const authOptions: AuthOptions = {
     async jwt({ token }) {
       const user = await User.findOne({ email: token.email });
       token.role = user?.role;
+      token.id = user?.id;
 
       return token;
     },
     async session({ session, token }: any) {
       session.user.role = token.role;
+      session.user.id = token.id;
       return session;
     },
   },

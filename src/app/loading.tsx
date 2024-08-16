@@ -3,7 +3,7 @@ import React from 'react';
 
 const Loading = () => {
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-secondary">
+    <div className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center">
       <Image
         src={'/images/loader.gif'}
         alt="Loading..."

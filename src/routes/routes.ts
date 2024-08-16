@@ -10,7 +10,7 @@ const UserRoleRoutes = {
   ],
   [UserRole.USER]: [
     '/',
-    '/profile/[id]',
+    '/profile',
     '/projects',
     '/projects/[id]',
     '/projects/[id]/tasks',

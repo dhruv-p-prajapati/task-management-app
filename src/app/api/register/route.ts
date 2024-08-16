@@ -3,8 +3,10 @@ import { mongoInit } from '@/lib/db/dbConfig';
 import User from '@/models/user.model';
 import bcryptjs from 'bcryptjs';
 import { IAPIResponse } from '@/types/APIResponse.types';
+import { IUser } from '@/types/user.types';
 
 mongoInit();
+
 export async function POST(request: NextRequest) {
   try {
     const { name, email, password } = await request.json();
@@ -12,7 +14,7 @@ export async function POST(request: NextRequest) {
     const existUser = await User.findOne({ email });
 
     if (existUser) {
-      return NextResponse.json<IAPIResponse>({
+      return NextResponse.json<IAPIResponse<null>>({
         success: false,
         data: null,
         message: 'User already Exists',
@@ -30,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     await newUser.save();
 
-    return NextResponse.json<IAPIResponse>({
+    return NextResponse.json<IAPIResponse<IUser>>({
       success: true,
       data: newUser,
       message: 'User Registered Successfully!!',
@@ -38,7 +40,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: any) {
     console.log('Error :- ', error.message);
-    return NextResponse.json<IAPIResponse>({
+    return NextResponse.json<IAPIResponse<null>>({
       success: false,
       data: null,
       message: 'Internal server Error. Try again after some time',

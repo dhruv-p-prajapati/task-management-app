@@ -9,17 +9,11 @@ import { useRouter } from 'next/navigation';
 import CustomForm from '@/components/common/CustomForm/CustomForm';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/components/ui/use-toast';
-import { EndPoints } from '@/types/endpoints.types';
+import { RouteConstants } from '@/constants/routes.constants';
 
 const RegisterPage = () => {
   const router = useRouter();
   const { toast } = useToast();
-
-  const initialValues = {
-    name: '',
-    email: '',
-    password: '',
-  };
 
   const passwordRules =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/;
@@ -50,7 +44,7 @@ const RegisterPage = () => {
       email: data.email,
       password: data.password,
       redirect: false,
-      endPoint: EndPoints.REGISTER,
+      endPoint: RouteConstants.REGISTER,
     });
 
     if (res?.error) {
@@ -90,7 +84,6 @@ const RegisterPage = () => {
 
         <div className="w-96">
           <CustomForm<z.infer<typeof signUpFormSchema>>
-            initialValues={initialValues}
             formSchema={signUpFormSchema}
             onSubmit={onSubmit}
             elements={[
